@@ -28,8 +28,6 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.contentView.bounds = CGRectMake(0, 0, 200, 200);
     }];
-    
-    UIAlertAction
 }
 
 - (UIView *)contentView
