@@ -16,8 +16,15 @@ typedef NS_ENUM(NSUInteger, XWActionStyle) {
 
 @interface XWAction : NSObject
 
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, assign, readonly) XWActionStyle style;
+
 + (instancetype)actionWithTitle:(NSString *)title
                           style:(XWActionStyle)style
                         handler:(void (^)())handler;
+
+- (instancetype)initWithTitle:(NSString *)title
+                        style:(XWActionStyle)style
+                      handler:(void (^)())handler;
 
 @end

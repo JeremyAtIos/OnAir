@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, XWModalViewAnimationType) {
 @property (nonatomic, assign) CGPoint moveOutPointOfAnimation;
 
 - (void)addAction:(XWAction *)action;
+@property (nonatomic, assign) CGSize actionButtonSize;
 
 @property (nonatomic, strong) UIView *customView;
 

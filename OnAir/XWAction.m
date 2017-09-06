@@ -10,4 +10,23 @@
 
 @implementation XWAction
 
++ (instancetype)actionWithTitle:(NSString *)title
+                          style:(XWActionStyle)style
+                        handler:(void (^)())handler
+{
+    return [[self alloc] initWithTitle:title style:style handler:handler];
+}
+
+- (instancetype)initWithTitle:(NSString *)title
+                        style:(XWActionStyle)style
+                      handler:(void (^)())handler
+{
+    self = [super init];
+    if (self) {
+        _title = title;
+        _style = style;
+    }
+    return self;
+}
+
 @end

@@ -7,12 +7,12 @@
 //
 
 #import "ViewController.h"
-
+#import "XWModalView.h"
+#import "XWAction.h"
 #define ONAIR_KEY_WINDOW [UIApplication sharedApplication].keyWindow
 
 @interface ViewController ()
 
-@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIControl *backgroundControl;
 
 @end
@@ -21,43 +21,21 @@
 
 - (IBAction)onAir:(id)sender
 {
-    [ONAIR_KEY_WINDOW addSubview:self.backgroundControl];
-    [ONAIR_KEY_WINDOW addSubview:self.contentView];
-    self.backgroundControl.frame = self.view.bounds;
-    self.contentView.center = ONAIR_KEY_WINDOW.center;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.contentView.bounds = CGRectMake(0, 0, 200, 200);
-    }];
-}
-
-- (UIView *)contentView
-{
-    if (!_contentView) {
-        _contentView = [[UIView alloc] init];
-        _contentView.layer.cornerRadius = 5.0f;
-        _contentView.backgroundColor = [UIColor whiteColor];
-    }
-    return _contentView;
-}
-
-- (UIControl *)backgroundControl
-{
-    if (!_backgroundControl) {
-        _backgroundControl = [[UIControl alloc] init];
-        _backgroundControl.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
-        [_backgroundControl addTarget:self action:@selector(backgroundTouched) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _backgroundControl;
-}
-
-- (void)backgroundTouched
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.contentView.bounds = CGRectZero;
-    } completion:^(BOOL finished) {
-        [self.contentView removeFromSuperview];
-        [self.backgroundControl removeFromSuperview];
-    }];
+    XWModalView *modalView = [XWModalView modalView];
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    contentView.backgroundColor = [UIColor blackColor];
+    modalView.customView = contentView;
+    
+    XWAction *action1 = [XWAction actionWithTitle:@"按钮1" style:XWActionStyleDefault handler:nil];
+    XWAction *action2 = [XWAction actionWithTitle:@"按钮2" style:XWActionStyleDefault handler:nil];
+    XWAction *action3 = [XWAction actionWithTitle:@"按钮3" style:XWActionStyleDefault handler:nil];
+    
+    [modalView addAction:action1];
+    [modalView addAction:action2];
+    [modalView addAction:action3];
+    
+    [modalView show];
 }
 
 @end
